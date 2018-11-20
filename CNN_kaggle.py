@@ -98,10 +98,10 @@ def train(images, labels):
         reshape_images(images)[9500:],define_classes(labels)[1][9500:],
             transforms=transform)
     
-    trainloader = torch.utils.data.DataLoader(trainset, batch_size=10,
+    trainloader = torch.utils.data.DataLoader(trainset, batch_size=128,
                                           shuffle=True, num_workers=0)
 
-    testloader = torch.utils.data.DataLoader(testset, batch_size=10,
+    testloader = torch.utils.data.DataLoader(testset, batch_size=128,
                                          shuffle=False, num_workers=0)
 
     classes = [str(i) for i in range(31)]
@@ -211,7 +211,7 @@ if __name__ == '__main__':
         encoding='latin1')
     
     train_labels = np.genfromtxt('train_labels.csv',
-        names=True, delimiter=',', dtype=object)
+        names=True, delimiter=',', dtype=[('Id', 'i8'), ('Category', 'S5')])
     
     t1 = time.time()    
     net, loss_train, loss_test, e_train, e_test = train(images_train, train_labels)    
